@@ -79,7 +79,6 @@ static void	*alloc_large(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	sort_allocs((t_alloc **)&g_alloc_large, ALLOC_NUM_LARGE);
 	ret = mmap(NULL, size, 0, 0, -1, 0);
 	alloc = g_alloc_large;
 	i = 0;
@@ -87,6 +86,7 @@ static void	*alloc_large(size_t size)
 		i++;
 	if (i == ALLOC_NUM_LARGE || !ret)
 		return NULL;
+	sort_allocs((t_alloc **)&g_alloc_large, ALLOC_NUM_LARGE);
 	alloc[i].start = ret;
 	alloc[i].size = size;
 	return ret;

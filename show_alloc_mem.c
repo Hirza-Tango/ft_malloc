@@ -6,7 +6,12 @@ t_alloc g_alloc_large[ALLOC_NUM_LARGE];
 t_alloc g_region_small;
 t_alloc g_region_tiny;
 
-void	*realloc(void *ptr, size_t size)
+void	show_alloc_mem(void)
+{
+
+}
+
+void	show_alloc_mem_ex(void)
 {
 
 }

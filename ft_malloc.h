@@ -17,11 +17,29 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <sys/mman.h>
+
+# ifdef __linux__
+#  define LONG_BIT 8
+# endif
 
 # define ALLOC_NUM_TINY 512
 # define ALLOC_NUM_SMALL 128
+# define ALLOC_NUM_LARGE 128
 # define ALLOC_SIZE_TINY (LONG_BIT / CHAR_BIT)
 # define ALLOC_SIZE_SMALL 512
+
+typedef struct	s_alloc{
+	void *start;
+	size_t size;
+}				t_alloc;
+
+extern t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
+extern t_alloc g_alloc_small[ALLOC_NUM_SMALL];
+extern t_alloc g_alloc_large[ALLOC_NUM_LARGE];
+
+extern t_alloc g_region_tiny;
+extern t_alloc g_region_small;
 
 void	free(void *ptr);
 void	*malloc(size_t size);

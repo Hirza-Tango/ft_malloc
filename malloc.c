@@ -35,47 +35,74 @@ static void	init_mem()
 	}
 }
 
-/* TODO: deal with null */
-static void sort_allocs(t_alloc **allocs, size_t size)
+static void *alloc_tiny(size_t size)
 {
-	t_alloc	temp;
+	void	*ret;
 	size_t	i;
-	size_t	j;
+	t_alloc *alloc;
 
-	while (i < size)
-	{
-		j = i++;
-		while (j > 0 && ((*allocs)[j - 1].start > (*allocs)[j].start ||
-			((*allocs)[j - 1].start == NULL && (*allocs)[j].start != NULL )))
-		{
-			temp = (*allocs)[j - 1];
-			(*allocs)[j - 1] = (*allocs)[j];
-			(*allocs)[j] = temp;
-			j--;
-		}
-	}
+	sort_allocs((t_alloc **)&g_alloc_tiny, ALLOC_NUM_TINY);
+	ret = alloc_space(g_alloc_tiny, g_region_tiny, ALLOC_SIZE_TINY, size);
+	alloc = g_alloc_tiny;
+	i = 0;
+	while (alloc[i].start != NULL && i < ALLOC_NUM_TINY)
+		i++;
+	if (i == ALLOC_NUM_TINY || !ret)
+		return NULL;
+	alloc[i].start = ret;
+	alloc[i].size = size;
+	return ret;
 }
 
-static void *alloc_tiny()
+static void *alloc_small(size_t size)
 {
-	sort_allocs((t_alloc **)&g_alloc_tiny, ALLOC_NUM_TINY);
-	// find first open space
-	// return first open space
+	void	*ret;
+	size_t	i;
+	t_alloc *alloc;
 
+	sort_allocs((t_alloc **)&g_alloc_small, ALLOC_NUM_SMALL);
+	ret = alloc_space(g_alloc_small, g_region_small, ALLOC_SIZE_SMALL, size);
+	alloc = g_alloc_small;
+	i = 0;
+	while (alloc[i].start != NULL && i < ALLOC_NUM_SMALL)
+		i++;
+	if (i == ALLOC_NUM_SMALL || !ret)
+		return NULL;
+	alloc[i].start = ret;
+	alloc[i].size = size;
+	return ret;
+}
+
+static void	*alloc_large(size_t size)
+{
+	void	*ret;
+	size_t	i;
+	t_alloc *alloc;
+
+	sort_allocs((t_alloc **)&g_alloc_large, ALLOC_NUM_LARGE);
+	ret = mmap(NULL, size, 0, 0, -1, 0);
+	alloc = g_alloc_large;
+	i = 0;
+	while (alloc[i].start != NULL && i < ALLOC_NUM_LARGE)
+		i++;
+	if (i == ALLOC_NUM_LARGE || !ret)
+		return NULL;
+	alloc[i].start = ret;
+	alloc[i].size = size;
+	return ret;
 }
 
 void		*malloc(size_t size)
 {
 	static char init = 0;
-	void *ret;
 
 	if (!init)
 		init_mem();
 	init = 1;
 	if (size <= ALLOC_SIZE_TINY)
-		return alloc_tiny();
+		return alloc_tiny(size);
 	else if (size <= ALLOC_SIZE_SMALL)
-		return alloc_small();
+		return alloc_small(size);
 	else
-		return alloc_large();
+		return alloc_large(size);
 }

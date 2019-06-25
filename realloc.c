@@ -6,7 +6,9 @@ t_alloc g_alloc_large[ALLOC_NUM_LARGE];
 t_alloc g_region_small;
 t_alloc g_region_tiny;
 
+/* TODO: this */
 void	*realloc(void *ptr, size_t size)
 {
-
+	(void)(ptr && size);
+	return NULL;
 }

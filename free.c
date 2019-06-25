@@ -22,7 +22,7 @@ void		free(void *ptr)
 {
 	size_t i;
 
-	if (!g_region_small.start || !g_region_tiny.start)
+	if (!g_region_small.start || !g_region_tiny.start || ptr == NULL)
 		return;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)

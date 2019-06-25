@@ -6,7 +6,7 @@
 /*   By: tango <dslogrove@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/06/25 15:35:09 by tango            ###   ########.fr       */
+/*   Updated: 2019/06/25 15:54:33 by tango            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*alloc_space(t_alloc *alloc, const t_alloc area, const size_t alloc_len,
 	return NULL;
 }
 
-void sort_allocs(t_alloc **allocs, size_t size)
+void	sort_allocs(t_alloc **allocs, size_t size)
 {
 	t_alloc	temp;
 	size_t	i;

@@ -8,30 +8,22 @@ LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
 REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%)
 CC=gcc
-CFLAGS=-Wall -Wextra -shared -Werror -I . -g -I $(INCLUDES) -Ofast
+CFLAGS=-Wall -Wextra -Werror -I . -I $(INCLUDES) -Ofast
 CFILES=	alloc_util.c	free.c	realloc.c	show_alloc_mem.c	malloc.c
-OBJ=$(CFILES:%.c=build/%.so)
+OBJ=$(CFILES:%.c=build/%.o)
 
 $(NAME): $(LOCAL_NAME)
-	@ln -s $^ $@
+	@ln -sf $^ $@
 
-$(LOCAL_NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -shared -fPIC $^ -o $@
+$(LOCAL_NAME): $(OBJ) $(REL_DEPS)
+	@$(CC) $(CFLAGS) -shared $^ -o $@
 
 $(REL_DEPS):
 	@make -C $(dir $@)
 
-build/malloc.so: malloc.c $(REL_DEPS) build/alloc_util.so
+build/%.o: %.c
 	@mkdir -p build
-	@$(CC) $(CFLAGS) -fPIC $^ -o $@
-
-build/show_alloc_mem.so: show_alloc_mem.c $(REL_DEPS) build/alloc_util.so
-	@mkdir -p build
-	@$(CC) $(CFLAGS) -fPIC $^ -o $@
-
-build/%.so: %.c $(REL_DEPS)
-	@mkdir -p build
-	@$(CC) $(CFLAGS) -fPIC $^ -o $@
+	@$(CC) $(CFLAGS) -c -fPIC $^ -o $@
 
 all: $(NAME);
 

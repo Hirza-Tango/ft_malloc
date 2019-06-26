@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tango <dslogrove@gmail.com>                +#+  +:+       +#+        */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/06/25 15:54:33 by tango            ###   ########.fr       */
+/*   Updated: 2019/06/26 12:58:56 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
 
 /* TODO: check for space boundry? */
 void	*alloc_space(t_alloc *alloc, const t_alloc area, const size_t alloc_len,
@@ -33,22 +32,22 @@ void	*alloc_space(t_alloc *alloc, const t_alloc area, const size_t alloc_len,
 	return NULL;
 }
 
-void	sort_allocs(t_alloc **allocs, size_t size)
+void	sort_allocs(t_alloc *allocs, size_t size)
 {
 	t_alloc	temp;
 	size_t	i;
 	size_t	j;
 
-	i = 0;
+	i = 1;
 	while (i < size)
 	{
 		j = i++;
-		while (j > 0 && ((*allocs)[j - 1].start > (*allocs)[j].start ||
-			((*allocs)[j - 1].start == NULL && (*allocs)[j].start != NULL )))
+		while ((j > 0 && allocs[j - 1].start > allocs[j].start) ||
+			(allocs[j - 1].start == NULL && allocs[j].start != NULL ))
 		{
-			temp = (*allocs)[j - 1];
-			(*allocs)[j - 1] = (*allocs)[j];
-			(*allocs)[j] = temp;
+			temp = (allocs)[j - 1];
+			(allocs)[j - 1] = (allocs)[j];
+			(allocs)[j] = temp;
 			j--;
 		}
 	}

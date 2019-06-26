@@ -1,4 +1,5 @@
 #include "ft_malloc.h"
+#include <stdio.h>
 
 t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
 t_alloc g_alloc_small[ALLOC_NUM_SMALL];
@@ -11,27 +12,27 @@ static void	init_mem()
 {
 	size_t i;
 
-	g_region_tiny.start = mmap(NULL,ALLOC_NUM_TINY * ALLOC_SIZE_TINY, 0, 0, -1, 0);
+	g_region_tiny.start = mmap(NULL,ALLOC_NUM_TINY * ALLOC_SIZE_TINY, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_region_tiny.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
-	g_region_small.start = mmap(NULL,ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, 0, 0, -1, 0);
+	g_region_small.start = mmap(NULL,ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_region_small.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)
 	{
 		g_alloc_tiny[i].start = NULL;
-		g_alloc_tiny[i].size = 0;
+		g_alloc_tiny[i++].size = 0;
 	}
 	i = 0;
 	while (i < ALLOC_NUM_SMALL)
 	{
 		g_alloc_small[i].start = NULL;
-		g_alloc_small[i].size = 0;
+		g_alloc_small[i++].size = 0;
 	}
 	i = 0;
 	while (i < ALLOC_NUM_LARGE)
 	{
 		g_alloc_large[i].start = NULL;
-		g_alloc_large[i].size = 0;
+		g_alloc_large[i++].size = 0;
 	}
 }
 
@@ -41,7 +42,7 @@ static void *alloc_tiny(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	sort_allocs((t_alloc **)&g_alloc_tiny, ALLOC_NUM_TINY);
+	sort_allocs((t_alloc *)g_alloc_tiny, ALLOC_NUM_TINY);
 	ret = alloc_space(g_alloc_tiny, g_region_tiny, ALLOC_SIZE_TINY, size);
 	alloc = g_alloc_tiny;
 	i = 0;
@@ -60,7 +61,7 @@ static void *alloc_small(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	sort_allocs((t_alloc **)&g_alloc_small, ALLOC_NUM_SMALL);
+	sort_allocs((t_alloc *)g_alloc_small, ALLOC_NUM_SMALL);
 	ret = alloc_space(g_alloc_small, g_region_small, ALLOC_SIZE_SMALL, size);
 	alloc = g_alloc_small;
 	i = 0;
@@ -99,7 +100,9 @@ void		*malloc(size_t size)
 		init_mem();
 	init = 1;
 	if (size <= ALLOC_SIZE_TINY)
+	{
 		return alloc_tiny(size);
+	}
 	else if (size <= ALLOC_SIZE_SMALL)
 		return alloc_small(size);
 	else

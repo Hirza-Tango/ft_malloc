@@ -1,4 +1,5 @@
 #include "ft_malloc.h"
+#include "ft_printf.h"
 
 t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
 t_alloc g_alloc_small[ALLOC_NUM_SMALL];
@@ -13,7 +14,7 @@ static size_t	show_tiny(void)
 	t_alloc	current;
 	
 	ft_printf("TINY : %p\n", g_region_tiny.start);
-	sort_allocs((t_alloc **)&g_alloc_tiny, ALLOC_NUM_TINY);
+	sort_allocs((t_alloc *)g_alloc_tiny, ALLOC_NUM_TINY);
 	i = 0;
 	ret = 0;
 	while (g_alloc_tiny[i].start != NULL && i < ALLOC_NUM_TINY)
@@ -33,7 +34,7 @@ static size_t	show_small(void)
 	t_alloc	current;
 	
 	ft_printf("SMALL : %p\n", g_region_small.start);
-	sort_allocs((t_alloc **)&g_alloc_small, ALLOC_NUM_SMALL);
+	sort_allocs((t_alloc *)g_alloc_small, ALLOC_NUM_SMALL);
 	i = 0;
 	ret = 0;
 	while (g_alloc_small[i].start != NULL && i < ALLOC_NUM_SMALL)
@@ -53,7 +54,7 @@ static size_t	show_large(void)
 	t_alloc	current;
 	
 	ft_printf("LARGE : \n");
-	sort_allocs((t_alloc **)&g_alloc_large, ALLOC_NUM_LARGE);
+	sort_allocs((t_alloc *)g_alloc_large, ALLOC_NUM_LARGE);
 	i = 0;
 	ret = 0;
 	while (g_alloc_large[i].start != NULL && i < ALLOC_NUM_LARGE)
@@ -66,7 +67,7 @@ static size_t	show_large(void)
 	return ret;
 }
 
-void	show_alloc_mem(void)
+void			show_alloc_mem(void)
 {
 	size_t	size;
 
@@ -74,7 +75,7 @@ void	show_alloc_mem(void)
 	ft_printf("Total : %zu bytes\n");
 }
 
-void	show_alloc_mem_ex(void)
+void			show_alloc_mem_ex(void)
 {
 
 }

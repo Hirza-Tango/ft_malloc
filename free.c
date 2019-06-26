@@ -26,23 +26,32 @@ void		free(void *ptr)
 		return;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)
+	{
 		if (g_alloc_tiny[i].start == ptr)
 		{
 			dealloc(&g_alloc_tiny[i]);
 			return;
 		}
+		i++;
+	}
 	i = 0;
 	while (i < ALLOC_NUM_SMALL)
+	{
 		if (g_alloc_small[i].start == ptr)
 		{
 			dealloc(&g_alloc_small[i]);
 			return;
 		}
+		i++;
+	}
 	i = 0;
 	while (i < ALLOC_NUM_LARGE)
+	{
 		if (g_alloc_large[i].start == ptr)
 		{
 			dealloc(&g_alloc_large[i]);
 			return;
 		}
+		i++;
+	}
 }

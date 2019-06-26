@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
+/*   Updated: 2019/06/26 17:00:38 by dslogrov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_malloc.h"
 
 t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
@@ -42,7 +54,7 @@ static void *alloc_tiny(size_t size)
 	t_alloc *alloc;
 
 	sort_allocs((t_alloc *)g_alloc_tiny, ALLOC_NUM_TINY);
-	ret = alloc_space(g_alloc_tiny, g_region_tiny, ALLOC_SIZE_TINY, size);
+	ret = alloc_space(g_alloc_tiny, g_region_tiny, ALLOC_NUM_TINY, size);
 	alloc = g_alloc_tiny;
 	i = 0;
 	while (alloc[i].start != NULL && i < ALLOC_NUM_TINY)

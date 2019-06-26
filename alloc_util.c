@@ -6,30 +6,32 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/06/26 16:07:59 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/26 17:03:29 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-/* TODO: check for space boundry? */
-void	*alloc_space(const t_alloc *alloc, const t_alloc area, const size_t alloc_len,
-	const size_t new_size)
+void	*alloc_space(
+	const t_alloc *alloc, const t_alloc area, const size_t alloc_len,
+	const size_t new_size
+)
 {
-	void *start;
-	size_t i;
+	void	*start;
+	size_t	i;
 
 	start = area.start;
 	i = 0;
 	while ((char *)start + new_size < (char *)area.start + area.size &&
 		i < alloc_len)
 	{
-		if (((char *)(alloc[i].start) - (char *)start) >= (long)new_size || alloc[i].start == NULL)
-			return start;
+		if (((char *)(alloc[i].start) - (char *)start) >= (long)new_size ||
+			alloc[i].start == NULL)
+			return (start);
 		start = (char *)(alloc[i].start) + alloc[i].size;
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
 void	sort_allocs(t_alloc *allocs, size_t size)
@@ -47,7 +49,7 @@ void	sort_allocs(t_alloc *allocs, size_t size)
 			if (allocs[j - 1].start != NULL && allocs[j].start == NULL)
 			{
 				j--;
-				break;
+				break ;
 			}
 			temp = (allocs)[j - 1];
 			(allocs)[j - 1] = (allocs)[j];

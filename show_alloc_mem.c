@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show_alloc_mem.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
+/*   Updated: 2019/06/26 17:00:47 by dslogrov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_malloc.h"
 #include <stdio.h>
 
@@ -36,7 +48,6 @@ static size_t	show_small(void)
 	size_t	ret;
 	t_alloc	current;
 	
-	//ft_putnbr((int)g_region_small.start);
 	printf("SMALL : %p\n", g_region_small.start);
 	sort_allocs((t_alloc *)g_alloc_small, ALLOC_NUM_SMALL);
 	i = 0;
@@ -77,6 +88,7 @@ static size_t	show_large(void)
 	return ret;
 }
 
+/* TODO: fix printf */
 void			show_alloc_mem(void)
 {
 	size_t	size;

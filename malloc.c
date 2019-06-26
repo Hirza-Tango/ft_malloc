@@ -1,5 +1,4 @@
 #include "ft_malloc.h"
-#include <stdio.h>
 
 t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
 t_alloc g_alloc_small[ALLOC_NUM_SMALL];
@@ -80,7 +79,9 @@ static void	*alloc_large(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	ret = mmap(NULL, size, 0, 0, -1, 0);
+	if (size % getpagesize())
+		size = ((size / getpagesize()) + 1) * getpagesize();
+	ret = mmap(NULL, size, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
 	alloc = g_alloc_large;
 	i = 0;
 	while (alloc[i].start != NULL && i < ALLOC_NUM_LARGE)
@@ -100,9 +101,7 @@ void		*malloc(size_t size)
 		init_mem();
 	init = 1;
 	if (size <= ALLOC_SIZE_TINY)
-	{
 		return alloc_tiny(size);
-	}
 	else if (size <= ALLOC_SIZE_SMALL)
 		return alloc_small(size);
 	else

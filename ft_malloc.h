@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/26 12:05:16 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/26 15:43:46 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ extern t_alloc	g_region_tiny;
 extern t_alloc	g_region_small;
 
 void			*alloc_space(
-	t_alloc *alloc, const t_alloc area, const size_t
+	const t_alloc *alloc, const t_alloc area, const size_t
 	alloc_len, const size_t new_size);
 void			sort_allocs(t_alloc *allocs, size_t size);
 

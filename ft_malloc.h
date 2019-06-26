@@ -6,15 +6,15 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/26 10:36:12 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/26 11:07:12 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MALLOC_H
 # define FT_MALLOC_H
 
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
+# include "libft.h"
+# include "ft_printf.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>

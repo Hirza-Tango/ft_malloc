@@ -86,7 +86,6 @@ static void	*alloc_large(size_t size)
 		i++;
 	if (i == ALLOC_NUM_LARGE || !ret)
 		return NULL;
-	sort_allocs((t_alloc **)&g_alloc_large, ALLOC_NUM_LARGE);
 	alloc[i].start = ret;
 	alloc[i].size = size;
 	return ret;

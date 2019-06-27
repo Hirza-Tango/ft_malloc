@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/26 17:00:38 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:14:56 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,25 @@ t_alloc g_region_tiny;
 static void	init_mem()
 {
 	size_t i;
+	t_alloc empty;
 
-	g_region_tiny.start = mmap(NULL,ALLOC_NUM_TINY * ALLOC_SIZE_TINY, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
+	empty.start = NULL;
+	empty.size = 0;
+	g_region_tiny.start = mmap(NULL,ALLOC_NUM_TINY * ALLOC_SIZE_TINY, 0,
+		MAP_ANON | MAP_PRIVATE, -1, NULL);
 	g_region_tiny.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
-	g_region_small.start = mmap(NULL,ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
+	g_region_small.start = mmap(NULL,ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, 0,
+		MAP_ANON | MAP_PRIVATE, -1, NULL);
 	g_region_small.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)
-	{
-		g_alloc_tiny[i].start = NULL;
-		g_alloc_tiny[i++].size = 0;
-	}
+		g_alloc_tiny[i++] = empty;
 	i = 0;
 	while (i < ALLOC_NUM_SMALL)
-	{
-		g_alloc_small[i].start = NULL;
-		g_alloc_small[i++].size = 0;
-	}
+		g_alloc_small[i++] = empty;
 	i = 0;
 	while (i < ALLOC_NUM_LARGE)
-	{
-		g_alloc_large[i].start = NULL;
-		g_alloc_large[i++].size = 0;
-	}
+		g_alloc_large[i++] = empty;
 }
 
 static void *alloc_tiny(size_t size)

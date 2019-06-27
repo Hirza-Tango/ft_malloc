@@ -1,5 +1,4 @@
 #include "ft_malloc.h"
-#include "libft.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -20,7 +19,7 @@ int main()
 		large_stuff[i] = malloc(rand() % (getpagesize() - ALLOC_SIZE_SMALL) + ALLOC_SIZE_SMALL);
 	}
 	show_alloc_mem();
-	printf("%p %p %p\n", small_stuff[ALLOC_NUM_TINY], med_stuff[ALLOC_NUM_SMALL], large_stuff[ALLOC_NUM_LARGE]);
+	printf("These should be NULL: %p %p %p\n", small_stuff[ALLOC_NUM_TINY], med_stuff[ALLOC_NUM_SMALL], large_stuff[ALLOC_NUM_LARGE]);
 	for (int i = 0; i <= ALLOC_NUM_TINY; i++){
 		free(small_stuff[i]);
 	}

@@ -6,12 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/27 17:04:24 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:10:30 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-#include "libft.h"
 
 t_alloc g_alloc_tiny[ALLOC_NUM_TINY];
 t_alloc g_alloc_small[ALLOC_NUM_SMALL];

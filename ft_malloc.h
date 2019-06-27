@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/26 15:43:46 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/27 17:10:20 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <sys/mman.h>
+# include "libft.h"
 
 # define ALLOC_NUM_TINY 512
 # define ALLOC_NUM_SMALL 128

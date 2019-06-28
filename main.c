@@ -53,5 +53,6 @@ int main()
 	free(small_stuff[0]);
 	free(med_stuff[0]);
 	free(large_stuff[0]);
+	show_alloc_mem();
 	ft_putendl("Bye");
 }

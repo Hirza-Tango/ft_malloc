@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 16:09:33 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:50:38 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,18 @@ t_alloc g_alloc_large[ALLOC_NUM_LARGE];
 t_alloc g_region_small;
 t_alloc g_region_tiny;
 
-/* TODO: hook main start? */
-static void	init_mem()
+static void	init_mem(void)
 {
-	size_t i;
-	t_alloc empty;
+	size_t	i;
+	t_alloc	empty;
 
 	empty.start = NULL;
 	empty.size = 0;
-	g_region_tiny.start = mmap(NULL, ALLOC_NUM_TINY * ALLOC_SIZE_TINY, PERM,
-		MAP_ANON | MAP_PRIVATE, -1,0);
+	g_region_tiny.start = mmap(NULL, ALLOC_NUM_TINY * ALLOC_SIZE_TINY, PERM
+		, MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_region_tiny.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
-	g_region_small.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, PERM,
-		MAP_ANON | MAP_PRIVATE, -1, 0);
+	g_region_small.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, PERM
+		, MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_region_small.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)
@@ -43,7 +42,7 @@ static void	init_mem()
 		g_alloc_large[i++] = empty;
 }
 
-static void *alloc_tiny(size_t size)
+static void	*alloc_tiny(size_t size)
 {
 	void	*ret;
 	size_t	i;
@@ -56,13 +55,13 @@ static void *alloc_tiny(size_t size)
 	while (alloc[i].start != NULL && i < ALLOC_NUM_TINY)
 		i++;
 	if (i == ALLOC_NUM_TINY || !ret)
-		return NULL;
+		return (NULL);
 	alloc[i].start = ret;
 	alloc[i].size = size;
-	return ret;
+	return (ret);
 }
 
-static void *alloc_small(size_t size)
+static void	*alloc_small(size_t size)
 {
 	void	*ret;
 	size_t	i;
@@ -75,10 +74,10 @@ static void *alloc_small(size_t size)
 	while (alloc[i].start != NULL && i < ALLOC_NUM_SMALL)
 		i++;
 	if (i == ALLOC_NUM_SMALL || !ret)
-		return NULL;
+		return (NULL);
 	alloc[i].start = ret;
 	alloc[i].size = size;
-	return ret;
+	return (ret);
 }
 
 static void	*alloc_large(size_t size)
@@ -95,10 +94,10 @@ static void	*alloc_large(size_t size)
 	while (alloc[i].start != NULL && i < ALLOC_NUM_LARGE)
 		i++;
 	if (i == ALLOC_NUM_LARGE || !ret)
-		return NULL;
+		return (NULL);
 	alloc[i].start = ret;
 	alloc[i].size = size;
-	return ret;
+	return (ret);
 }
 
 void		*malloc(size_t size)
@@ -109,9 +108,9 @@ void		*malloc(size_t size)
 		init_mem();
 	init = 1;
 	if (size <= ALLOC_SIZE_TINY)
-		return alloc_tiny(size);
+		return (alloc_tiny(size));
 	else if (size <= ALLOC_SIZE_SMALL)
-		return alloc_small(size);
+		return (alloc_small(size));
 	else
-		return alloc_large(size);
+		return (alloc_large(size));
 }

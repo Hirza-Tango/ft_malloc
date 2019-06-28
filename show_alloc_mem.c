@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 16:21:55 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:47:33 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static size_t	show_tiny(void)
 {
 	size_t	i;
 	size_t	ret;
-	
+
 	ft_putstr("TINY : ");
 	ft_putptr(g_region_tiny.start);
 	ft_putendl("");
@@ -53,7 +53,7 @@ static size_t	show_small(void)
 {
 	size_t	i;
 	size_t	ret;
-	
+
 	ft_putstr("SMALL : ");
 	ft_putptr(g_region_small.start);
 	ft_putendl("");
@@ -74,7 +74,7 @@ static size_t	show_large(void)
 {
 	size_t	i;
 	size_t	ret;
-	
+
 	ft_putendl("LARGE :");
 	sort_allocs((t_alloc *)g_alloc_large, ALLOC_NUM_LARGE);
 	i = 0;

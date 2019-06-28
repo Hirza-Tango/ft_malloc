@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:26 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 14:59:23 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:37:46 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	dealloc(t_alloc *alloc)
 	alloc->size = 0;
 }
 
-/* TODO: atexit handler for unmap */
 void		free(void *ptr)
 {
 	size_t i;

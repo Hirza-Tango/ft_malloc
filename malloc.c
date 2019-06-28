@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/27 17:14:56 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:09:33 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static void	init_mem()
 
 	empty.start = NULL;
 	empty.size = 0;
-	g_region_tiny.start = mmap(NULL,ALLOC_NUM_TINY * ALLOC_SIZE_TINY, 0,
-		MAP_ANON | MAP_PRIVATE, -1, NULL);
+	g_region_tiny.start = mmap(NULL, ALLOC_NUM_TINY * ALLOC_SIZE_TINY, PERM,
+		MAP_ANON | MAP_PRIVATE, -1,0);
 	g_region_tiny.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
-	g_region_small.start = mmap(NULL,ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, 0,
-		MAP_ANON | MAP_PRIVATE, -1, NULL);
+	g_region_small.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, PERM,
+		MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_region_small.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
 	i = 0;
 	while (i < ALLOC_NUM_TINY)
@@ -89,7 +89,7 @@ static void	*alloc_large(size_t size)
 
 	if (size % getpagesize())
 		size = ((size / getpagesize()) + 1) * getpagesize();
-	ret = mmap(NULL, size, 0, MAP_ANON | MAP_PRIVATE, -1, 0);
+	ret = mmap(NULL, size, PERM, MAP_ANON | MAP_PRIVATE, -1, 0);
 	alloc = g_alloc_large;
 	i = 0;
 	while (alloc[i].start != NULL && i < ALLOC_NUM_LARGE)

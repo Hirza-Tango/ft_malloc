@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/27 17:10:30 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:21:55 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ t_alloc g_region_tiny;
 
 static void		show_range(t_alloc alloc)
 {
-		ft_putptr(alloc.start);
-		ft_putstr(" - ");
-		ft_putptr(alloc.start + alloc.size);
-		ft_putstr(" : ");
-		ft_put_uintmax_base(alloc.size, 10);
-		ft_putendl(" bytes");
+	ft_putptr(alloc.start);
+	ft_putstr(" - ");
+	ft_putptr(alloc.start + alloc.size);
+	ft_putstr(" : ");
+	ft_put_uintmax_base(alloc.size, 10);
+	ft_putendl(" bytes");
 }
 
 static size_t	show_tiny(void)
@@ -46,7 +46,7 @@ static size_t	show_tiny(void)
 		show_range(g_alloc_tiny[i]);
 		ret += g_alloc_tiny[i++].size;
 	}
-	return ret;
+	return (ret);
 }
 
 static size_t	show_small(void)
@@ -67,7 +67,7 @@ static size_t	show_small(void)
 		show_range(g_alloc_small[i]);
 		ret += g_alloc_small[i++].size;
 	}
-	return ret;
+	return (ret);
 }
 
 static size_t	show_large(void)
@@ -86,10 +86,9 @@ static size_t	show_large(void)
 		show_range(g_alloc_large[i]);
 		ret += g_alloc_large[i++].size;
 	}
-	return ret;
+	return (ret);
 }
 
-/* TODO: fix printf */
 void			show_alloc_mem(void)
 {
 	size_t	size;

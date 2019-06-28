@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/06/26 17:03:29 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 16:26:25 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	sort_allocs(t_alloc *allocs, size_t size)
 	while (i < size)
 	{
 		j = i++;
-		while ((j > 0 && allocs[j - 1].start > allocs[j].start))
+		while (j > 0)
 		{
 			if (allocs[j - 1].start != NULL && allocs[j].start == NULL)
 			{
 				j--;
-				break ;
+				continue ;
 			}
 			temp = (allocs)[j - 1];
 			(allocs)[j - 1] = (allocs)[j];

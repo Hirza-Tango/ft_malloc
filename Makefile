@@ -21,9 +21,9 @@ $(LOCAL_NAME): $(OBJ) $(REL_DEPS)
 $(REL_DEPS):
 	@make -C $(dir $@)
 
-build/%.o: %.c
+build/%.o: %.c ft_malloc.h
 	@mkdir -p build
-	@$(CC) $(CFLAGS) -c -fPIC $^ -o $@
+	@$(CC) $(CFLAGS) -c -fPIC $< -o $@
 
 all: $(NAME);
 

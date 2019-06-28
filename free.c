@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:26 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/26 17:00:28 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 14:59:23 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void		free(void *ptr)
 	i = -1UL;
 	while (++i < ALLOC_NUM_TINY)
 		if (g_alloc_tiny[i].start == ptr)
-			return (void)dealloc(&g_alloc_tiny[i]);
+			return ((void)dealloc(&g_alloc_tiny[i]));
 	i = -1UL;
 	while (++i < ALLOC_NUM_SMALL)
 		if (g_alloc_small[i].start == ptr)
-			return (void)dealloc(&g_alloc_small[i]);
+			return ((void)dealloc(&g_alloc_small[i]));
 	i = -1UL;
 	while (++i < ALLOC_NUM_LARGE)
 		if (g_alloc_large[i].start == ptr)
 		{
 			munmap(g_alloc_large[i].start, g_alloc_large[i].size);
-			return (void)dealloc(&g_alloc_large[i]);
+			return ((void)dealloc(&g_alloc_large[i]));
 		}
 }

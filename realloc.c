@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 17:11:50 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/06/28 17:12:52 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static t_alloc_search	find_entry(void *ptr)
 	i = -1;
 	while (++i < ALLOC_NUM_SMALL)
 		if (g_alloc.small[i].start == ptr)
-			return (search_result(&(g_alloc.small[i]), i, ALLOC_SIZE_SMALL, (i ==
-				ALLOC_NUM_SMALL ? g_alloc.area_s.start + g_alloc.area_s.size
+			return (search_result(&(g_alloc.small[i]), i, ALLOC_SIZE_SMALL, (i
+			== ALLOC_NUM_SMALL ? g_alloc.area_s.start + g_alloc.area_s.size
 				: g_alloc.small[i + 1].start) - g_alloc.small[i].start));
 			sort_allocs(g_alloc.large, ALLOC_NUM_LARGE);
 	i = -1;

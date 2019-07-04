@@ -16,14 +16,14 @@ $(NAME): $(LOCAL_NAME)
 	@ln -sf $^ $@
 
 $(LOCAL_NAME): $(OBJ) $(REL_DEPS)
-	@$(CC) $(CFLAGS) -shared $^ -o $@
+	@$(CC) $(CFLAGS) -shared $(OBJ) -L libft/libft -lft -o $@
 
 $(REL_DEPS):
 	@make -C $(dir $@)
 
 build/%.o: %.c ft_malloc.h
 	@mkdir -p build
-	@$(CC) $(CFLAGS) -c -fPIC $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME);
 

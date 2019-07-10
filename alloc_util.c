@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
+/*   By: tango <dslogrove@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/07/10 15:41:22 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/10 21:54:58 by tango            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*alloc_space(
 
 	start = area.start;
 	i = 0;
-	while ((char *)start + new_size < (char *)area.start + area.size &&
+	while ((char *)start + new_size <= (char *)area.start + area.size &&
 		i < alloc_len)
 	{
 		if (((char *)(alloc[i].start) - (char *)start) >= (long)new_size ||

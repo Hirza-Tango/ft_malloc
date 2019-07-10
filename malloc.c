@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 17:06:18 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:33:16 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ static void	*alloc_large(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	if (size % getpagesize())
-		size = ((size / getpagesize()) + 1) * getpagesize();
 	ret = mmap(NULL, size, PERM, MAP_ANON | MAP_PRIVATE, -1, 0);
 	alloc = g_alloc.large;
 	i = 0;
@@ -100,9 +98,11 @@ void		*malloc(size_t size)
 {
 	static char init = 0;
 
-	if (!init)
+	if (!init && size <= ALLOC_SIZE_SMALL)
+	{
 		init_mem();
-	init = 1;
+		init = 1;
+	}
 	if (size <= ALLOC_SIZE_TINY)
 		return (alloc_tiny(size));
 	else if (size <= ALLOC_SIZE_SMALL)

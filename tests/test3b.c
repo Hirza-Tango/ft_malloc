@@ -1,6 +1,7 @@
 #define M (1024 * 1024)
 #include <unistd.h>
 #include <string.h>
+#include "ft_malloc.h"
 
 void print(char *s)
 {

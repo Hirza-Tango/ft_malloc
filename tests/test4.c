@@ -1,6 +1,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
+#include "ft_malloc.h"
+
 void print(char *s){
 	write(1, s, strlen(s));
 }

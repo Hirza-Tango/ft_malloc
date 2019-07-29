@@ -13,10 +13,10 @@ int main()
 		small_stuff[i] = malloc(rand() % (ALLOC_SIZE_TINY - 1) + 1);
 	}
 	for (int i = 0; i <= ALLOC_NUM_SMALL; i++){
-		med_stuff[i] = malloc(rand() % (ALLOC_SIZE_SMALL - ALLOC_SIZE_TINY) + ALLOC_SIZE_TINY);
+		med_stuff[i] = malloc(rand() % (ALLOC_SIZE_SMALL - ALLOC_SIZE_TINY - 1) + ALLOC_SIZE_TINY + 1);
 	}
 	for (int i = 0; i <= ALLOC_NUM_LARGE; i++){
-		large_stuff[i] = malloc(rand() % (getpagesize() - ALLOC_SIZE_SMALL) + ALLOC_SIZE_SMALL);
+		large_stuff[i] = malloc(rand() % (getpagesize() - ALLOC_SIZE_SMALL - 1) + ALLOC_SIZE_SMALL + 1);
 	}
 	show_alloc_mem();
 	printf("These should be NULL: %p %p %p\n", small_stuff[ALLOC_NUM_TINY], med_stuff[ALLOC_NUM_SMALL], large_stuff[ALLOC_NUM_LARGE]);
@@ -40,7 +40,7 @@ int main()
 	small_stuff[0] = realloc(small_stuff[0], 6);
 	med_stuff[0] = realloc(med_stuff[0], 12);
 	large_stuff[0] = realloc(large_stuff[0], 513);
-	show_alloc_mem();
+	show_alloc_mem_ex();
 	((char *)small_stuff[0])[5] = 0;
 	((char *)med_stuff[0])[11] = 0;
 	((char *)large_stuff[0])[512] = 0;
@@ -53,6 +53,6 @@ int main()
 	free(small_stuff[0]);
 	free(med_stuff[0]);
 	free(large_stuff[0]);
-	show_alloc_mem();
+	show_alloc_mem_ex();
 	ft_putendl("Bye");
 }

@@ -6,13 +6,14 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/10 15:33:16 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:08:34 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
 t_alloc_table	g_alloc;
+pthread_mutex_t	g_mutex;
 
 static void	init_mem(void)
 {
@@ -21,6 +22,7 @@ static void	init_mem(void)
 
 	empty.start = NULL;
 	empty.size = 0;
+	pthread_mutex_init(&g_mutex, NULL);
 	g_alloc.area_t.start = mmap(NULL, ALLOC_NUM_TINY * ALLOC_SIZE_TINY, PERM
 		, MAP_ANON | MAP_PRIVATE, -1, 0);
 	g_alloc.area_t.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
@@ -97,16 +99,20 @@ static void	*alloc_large(size_t size)
 void		*malloc(size_t size)
 {
 	static char init = 0;
+	void		*ret;
 
 	if (!init && size <= ALLOC_SIZE_SMALL)
 	{
 		init_mem();
 		init = 1;
 	}
+	pthread_mutex_lock(&g_mutex);
 	if (size <= ALLOC_SIZE_TINY)
-		return (alloc_tiny(size));
+		ret = alloc_tiny(size);
 	else if (size <= ALLOC_SIZE_SMALL)
-		return (alloc_small(size));
+		ret = alloc_small(size);
 	else
-		return (alloc_large(size));
+		ret = alloc_large(size);
+	pthread_mutex_unlock(&g_mutex);
+	return (ret);
 }

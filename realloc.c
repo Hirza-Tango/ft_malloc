@@ -6,13 +6,14 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 17:12:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:07:53 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
-t_alloc_table			g_alloc;
+t_alloc_table	g_alloc;
+pthread_mutex_t	g_mutex;
 
 static t_alloc_search	search_result(
 	t_alloc *alloc, int index, size_t area_max, size_t distance
@@ -72,8 +73,9 @@ void					*realloc(void *ptr, size_t size)
 	t_alloc_search	search;
 	void			*alloc;
 
+	pthread_mutex_lock(&g_mutex);
 	if (!ptr || (search = find_entry(ptr)).index == -1)
-		return (NULL);
+		return (NULL && pthread_mutex_unlock(&g_mutex));
 	if ((search.alloc->size <= ALLOC_SIZE_TINY && size > ALLOC_SIZE_TINY) ||
 		(search.alloc->size <= ALLOC_SIZE_SMALL && (ALLOC_SIZE_TINY >= size ||
 		ALLOC_SIZE_SMALL < size)) || (search.alloc->size > ALLOC_SIZE_SMALL &&
@@ -82,11 +84,13 @@ void					*realloc(void *ptr, size_t size)
 		alloc = malloc(size);
 		ft_memcpy(alloc, search.alloc->start, MIN(size, search.alloc->size));
 		free(ptr);
+		pthread_mutex_unlock(&g_mutex);
 		return (alloc);
 	}
 	else
 	{
 		search.alloc->size = size;
+		pthread_mutex_unlock(&g_mutex);
 		return (ptr);
 	}
 }

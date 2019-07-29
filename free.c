@@ -6,24 +6,27 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:26 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 17:05:13 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 14:06:30 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
 
 t_alloc_table	g_alloc;
+pthread_mutex_t	g_mutex;
 
 static void	dealloc(t_alloc *alloc)
 {
 	alloc->start = NULL;
 	alloc->size = 0;
+	pthread_mutex_unlock(&g_mutex);
 }
 
 void		free(void *ptr)
 {
 	size_t i;
 
+	pthread_mutex_lock(&g_mutex);
 	if (!g_alloc.area_s.start || !g_alloc.area_t.start || ptr == NULL)
 		return ;
 	i = -1UL;

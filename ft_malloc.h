@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/10 15:43:43 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 13:59:25 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <limits.h>
 # include <sys/mman.h>
 # include "libft.h"
+# include <pthread.h>
 
 # define ALLOC_SIZE_TINY 64
 # define ALLOC_SIZE_SMALL 1024
@@ -49,6 +50,7 @@ typedef struct			s_alloc_table
 }						t_alloc_table;
 
 extern t_alloc_table	g_alloc;
+extern pthread_mutex_t	g_mutex;
 
 void					*alloc_space(
 	const t_alloc *alloc, const t_alloc area, const size_t

@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 13:59:25 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:18:12 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,16 @@ typedef struct			s_alloc_table
 extern t_alloc_table	g_alloc;
 extern pthread_mutex_t	g_mutex;
 
-void					*alloc_space(
-	const t_alloc *alloc, const t_alloc area, const size_t
-	alloc_len, const size_t new_size);
+void					*alloc_space(const t_alloc *alloc, const t_alloc area,
+	const size_t alloc_len, const size_t new_size);
 void					sort_allocs(t_alloc *allocs, size_t size);
+void					show_range(t_alloc alloc);
 
 void					free(void *ptr);
 void					*malloc(size_t size);
 void					*realloc(void *ptr, size_t size);
 
 void					show_alloc_mem(void);
+void					show_alloc_mem_ex(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tango <dslogrove@gmail.com>                +#+  +:+       +#+        */
+/*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 14:59:17 by tango             #+#    #+#             */
-/*   Updated: 2019/07/10 21:54:58 by tango            ###   ########.fr       */
+/*   Updated: 2019/07/29 14:13:44 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ void	sort_allocs(t_alloc *allocs, size_t size)
 			j--;
 		}
 	}
+}
+
+void	show_range(t_alloc alloc)
+{
+	ft_putptr(alloc.start);
+	ft_putstr(" - ");
+	ft_putptr(alloc.start + alloc.size);
+	ft_putstr(" : ");
+	ft_put_uintmax_base(alloc.size, 10);
+	ft_putendl(" bytes");
 }

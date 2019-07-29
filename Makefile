@@ -8,7 +8,7 @@ LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
 REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%)
 CC=gcc
-CFLAGS=-Wall -Wextra -Werror -I . -I $(INCLUDES) -Ofast
+CFLAGS=-Wall -Wextra -Werror -I . -I $(INCLUDES) -O3
 CFILES=	alloc_util.c	free.c	realloc.c	show_alloc_mem.c	malloc.c
 OBJ=$(CFILES:%.c=build/%.o)
 

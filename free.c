@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:26 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 14:06:30 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 15:21:32 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void		free(void *ptr)
 
 	pthread_mutex_lock(&g_mutex);
 	if (!g_alloc.area_s.start || !g_alloc.area_t.start || ptr == NULL)
+	{
+		pthread_mutex_unlock(&g_mutex);
 		return ;
+	}
 	i = -1UL;
 	while (++i < ALLOC_NUM_TINY)
 		if (g_alloc.tiny[i].start == ptr)

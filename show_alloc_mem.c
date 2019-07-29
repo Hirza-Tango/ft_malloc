@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 15:17:59 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/29 16:21:03 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static size_t	show_large(char show_hexdump)
 			break ;
 		show_range(g_alloc.large[i]);
 		if (show_hexdump)
-			ft_hexdump(g_alloc.small[i].start, g_alloc.small[i].size, 0, 1);
+			ft_hexdump(g_alloc.large[i].start, g_alloc.large[i].size, 0, 1);
 		ret += g_alloc.large[i++].size;
 	}
 	return (ret);

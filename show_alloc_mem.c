@@ -6,13 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/30 15:49:39 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/31 12:54:40 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-t_alloc_table	g_alloc;
 
 static size_t	show_tiny(char show_hexdump)
 {

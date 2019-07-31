@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/30 15:53:51 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/31 13:03:41 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define ALLOC_SIZE_SMALL 1024
 # define ALLOC_NUM_TINY 128
 # define ALLOC_NUM_SMALL 1024
-# define ALLOC_NUM_LARGE 128
+# define ALLOC_NUM_LARGE 100
 # define PERM PROT_READ | PROT_WRITE
 
 typedef struct			s_alloc

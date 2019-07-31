@@ -3,7 +3,7 @@ ifeq ($(HOSTTYPE),)
 endif
 NAME=libft_malloc.so
 LOCAL_NAME=libft_malloc_$(HOSTTYPE).so
-DEPS=libft/libft.a ft_printf/libftprintf.a
+DEPS=libft/libft.a
 LIBFT_DIR=libft
 INCLUDES=$(LIBFT_DIR)/includes
 REL_DEPS=$(DEPS:%=$(LIBFT_DIR)/%)

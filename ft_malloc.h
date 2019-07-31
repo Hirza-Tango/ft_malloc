@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 15:18:12 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/30 15:53:51 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include "libft.h"
 # include <pthread.h>
 
-# define ALLOC_SIZE_TINY 64
+# define ALLOC_SIZE_TINY 16
 # define ALLOC_SIZE_SMALL 1024
-# define ALLOC_NUM_TINY 1024
+# define ALLOC_NUM_TINY 128
 # define ALLOC_NUM_SMALL 1024
-# define ALLOC_NUM_LARGE 1024
+# define ALLOC_NUM_LARGE 128
 # define PERM PROT_READ | PROT_WRITE
 
 typedef struct			s_alloc

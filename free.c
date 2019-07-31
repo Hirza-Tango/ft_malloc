@@ -6,14 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:26 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 15:21:32 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/30 15:46:40 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-t_alloc_table	g_alloc;
-pthread_mutex_t	g_mutex;
 
 static void	dealloc(t_alloc *alloc)
 {

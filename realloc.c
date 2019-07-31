@@ -6,14 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 16:08:07 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/30 15:46:45 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-t_alloc_table	g_alloc;
-pthread_mutex_t	g_mutex;
 
 static t_alloc_search	search_result(
 	t_alloc *alloc, int index, size_t area_max, size_t distance

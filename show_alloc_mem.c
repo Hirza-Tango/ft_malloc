@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/29 16:21:03 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/07/30 15:49:39 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void			show_alloc_mem(void)
 
 void			show_alloc_mem_ex(void)
 {
-		size_t	size;
+	size_t	size;
 
 	size = show_tiny(1) + show_small(1) + show_large(1);
 	ft_putstr("Total : ");

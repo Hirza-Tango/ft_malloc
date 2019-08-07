@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/30 15:46:45 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 11:23:09 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,24 @@ void					*realloc(void *ptr, size_t size)
 	void			*alloc;
 
 	if (!ptr || (search = find_entry(ptr)).index == -1)
-	{
 		return (NULL);
-	}
 	if ((search.alloc->size <= ALLOC_SIZE_TINY && size > ALLOC_SIZE_TINY) ||
 		(search.alloc->size <= ALLOC_SIZE_SMALL && (ALLOC_SIZE_TINY >= size ||
 		ALLOC_SIZE_SMALL < size)) || (search.alloc->size > ALLOC_SIZE_SMALL &&
 		size <= ALLOC_SIZE_SMALL) || search.distance < size)
 	{
 		alloc = malloc(size);
-		pthread_mutex_lock(&g_mutex);
+		MUTEX_LOCK;
 		ft_memmove(alloc, search.alloc->start, MIN(size, search.alloc->size));
-		pthread_mutex_unlock(&g_mutex);
+		MUTEX_UNLOCK;
 		free(ptr);
 		return (alloc);
 	}
 	else
 	{
-		pthread_mutex_lock(&g_mutex);
+		MUTEX_LOCK;
 		search.alloc->size = size;
-		pthread_mutex_unlock(&g_mutex);
+		MUTEX_UNLOCK;
 		return (ptr);
 	}
 }

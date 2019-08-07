@@ -16,7 +16,7 @@ $(NAME): $(LOCAL_NAME)
 	@ln -sf $^ $@
 
 $(LOCAL_NAME): $(OBJ) $(REL_DEPS)
-	@$(CC) $(CFLAGS) -shared $(OBJ) -L libft/libft -lft -o $@
+	@$(CC) $(CFLAGS) -shared $(OBJ) -L libft/libft -lft -o $@ -D MUTEX_ENABLE
 
 $(REL_DEPS):
 	@make -C $(dir $@)

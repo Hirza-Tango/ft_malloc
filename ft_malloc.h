@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 14:38:49 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/08/07 12:15:19 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:19:43 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # define ALLOC_SIZE_TINY 16
 # define ALLOC_SIZE_SMALL 1024
-# define ALLOC_NUM_TINY 128
+# define ALLOC_NUM_TINY 256
 # define ALLOC_NUM_SMALL 1024
 # define ALLOC_NUM_LARGE 100
 # define PERM PROT_READ | PROT_WRITE
@@ -51,9 +51,9 @@ typedef struct			s_alloc_search
 
 typedef struct			s_alloc_table
 {
-	t_alloc	*tiny;
-	t_alloc	*small;
-	t_alloc	*large;
+	t_alloc	tiny[ALLOC_NUM_TINY];
+	t_alloc	small[ALLOC_NUM_SMALL];
+	t_alloc	large[ALLOC_NUM_LARGE];
 	t_alloc	area_t;
 	t_alloc area_s;
 }						t_alloc_table;

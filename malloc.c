@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/08/07 12:11:03 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:20:14 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@ static void	*alloc_tiny(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	if (!g_alloc.tiny)
+	if (!g_alloc.area_t.start)
 	{
 		g_alloc.area_t.start = mmap(NULL, ALLOC_NUM_TINY * ALLOC_SIZE_TINY, PERM
 			, MAP_ANON | MAP_PRIVATE, -1, 0);
 		g_alloc.area_t.size = ALLOC_NUM_TINY * ALLOC_SIZE_TINY;
-		g_alloc.tiny = mmap(NULL, sizeof(t_alloc) * ALLOC_NUM_TINY , PERM
-			, MAP_ANON | MAP_PRIVATE, -1, 0);
-		ft_bzero(g_alloc.tiny, sizeof(t_alloc) * ALLOC_NUM_TINY);
 	}
 	sort_allocs((t_alloc *)g_alloc.tiny, ALLOC_NUM_TINY);
 	ret = alloc_space(g_alloc.tiny, g_alloc.area_t, ALLOC_NUM_TINY, size);
@@ -49,16 +46,12 @@ static void	*alloc_small(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	if (!g_alloc.small)
+	if (!g_alloc.area_s.start)
 	{
 		g_alloc.area_s.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, PERM
 			, MAP_ANON | MAP_PRIVATE, -1, 0);
 		g_alloc.area_s.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
-		g_alloc.small = mmap(NULL, sizeof(t_alloc) * ALLOC_NUM_SMALL , PERM
-			, MAP_ANON | MAP_PRIVATE, -1, 0);
-		ft_bzero(g_alloc.small, sizeof(t_alloc) * ALLOC_NUM_SMALL);
 	}
-
 	sort_allocs((t_alloc *)g_alloc.small, ALLOC_NUM_SMALL);
 	ret = alloc_space(g_alloc.small, g_alloc.area_s, ALLOC_SIZE_SMALL, size);
 	alloc = g_alloc.small;
@@ -78,12 +71,6 @@ static void	*alloc_large(size_t size)
 	size_t	i;
 	t_alloc *alloc;
 
-	if (!g_alloc.large)
-	{
-		g_alloc.large = mmap(NULL, sizeof(t_alloc) * ALLOC_NUM_LARGE , PERM
-			, MAP_ANON | MAP_PRIVATE, -1, 0);
-		ft_bzero(g_alloc.large, sizeof(t_alloc) * ALLOC_NUM_LARGE);
-	}
 	ret = mmap(NULL, size, PERM, MAP_ANON | MAP_PRIVATE, -1, 0);
 	alloc = g_alloc.large;
 	i = 0;
@@ -104,6 +91,7 @@ void		*malloc(size_t size)
 	if (!init)
 	{
 		MUTEX_INIT;
+
 		init = 1;
 	}
 	MUTEX_LOCK;

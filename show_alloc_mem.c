@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:45 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/07/31 12:54:40 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:37:28 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,22 @@ void			show_alloc_mem(void)
 {
 	size_t	size;
 
+	MUTEX_LOCK;
 	size = show_tiny(0) + show_small(0) + show_large(0);
 	ft_putstr("Total : ");
 	ft_putnbr(size);
 	ft_putendl(" bytes");
+	MUTEX_UNLOCK;
 }
 
 void			show_alloc_mem_ex(void)
 {
 	size_t	size;
 
+	MUTEX_LOCK;
 	size = show_tiny(1) + show_small(1) + show_large(1);
 	ft_putstr("Total : ");
 	ft_putnbr(size);
 	ft_putendl(" bytes");
+	MUTEX_UNLOCK;
 }

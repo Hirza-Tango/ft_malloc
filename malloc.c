@@ -6,7 +6,7 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:36 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/08/07 16:20:14 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:24:06 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void	*alloc_small(size_t size)
 
 	if (!g_alloc.area_s.start)
 	{
-		g_alloc.area_s.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL, PERM
-			, MAP_ANON | MAP_PRIVATE, -1, 0);
+		g_alloc.area_s.start = mmap(NULL, ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL,
+			PERM, MAP_ANON | MAP_PRIVATE, -1, 0);
 		g_alloc.area_s.size = ALLOC_NUM_SMALL * ALLOC_SIZE_SMALL;
 	}
 	sort_allocs((t_alloc *)g_alloc.small, ALLOC_NUM_SMALL);
@@ -91,7 +91,6 @@ void		*malloc(size_t size)
 	if (!init)
 	{
 		MUTEX_INIT;
-
 		init = 1;
 	}
 	MUTEX_LOCK;

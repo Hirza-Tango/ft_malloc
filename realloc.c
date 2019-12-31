@@ -6,13 +6,11 @@
 /*   By: dslogrov <dslogrove@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/26 17:00:40 by dslogrov          #+#    #+#             */
-/*   Updated: 2019/06/28 17:12:52 by dslogrov         ###   ########.fr       */
+/*   Updated: 2019/08/07 11:23:09 by dslogrov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_malloc.h"
-
-t_alloc_table			g_alloc;
 
 static t_alloc_search	search_result(
 	t_alloc *alloc, int index, size_t area_max, size_t distance
@@ -80,13 +78,17 @@ void					*realloc(void *ptr, size_t size)
 		size <= ALLOC_SIZE_SMALL) || search.distance < size)
 	{
 		alloc = malloc(size);
-		ft_memcpy(alloc, search.alloc->start, MIN(size, search.alloc->size));
+		MUTEX_LOCK;
+		ft_memmove(alloc, search.alloc->start, MIN(size, search.alloc->size));
+		MUTEX_UNLOCK;
 		free(ptr);
 		return (alloc);
 	}
 	else
 	{
+		MUTEX_LOCK;
 		search.alloc->size = size;
+		MUTEX_UNLOCK;
 		return (ptr);
 	}
 }
